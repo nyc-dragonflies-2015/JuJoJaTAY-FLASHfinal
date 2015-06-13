@@ -1,0 +1,7 @@
+Number of correct guesses:
+<%= @guess.all.where(correct: true).count %>
+<br>
+Number of incorrect guesses:
+<%= @guess.all.where(correct: false).count %>
+<br>
+<a href="/decks/<%= @deck.id %>">Play again?</a> | | <a href="/decks">Another deck?</a>
