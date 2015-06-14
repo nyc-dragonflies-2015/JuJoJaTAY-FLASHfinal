@@ -1,5 +1,5 @@
 <% if @deck %>
-<% @cur_round = [] %>
+  <% @cur_round = [] %>
   <% @deck.cards.each {|card| @cur_round << card.question } %>
   <%= @cur_round[session[:guesses]] %>
 <% end %>
