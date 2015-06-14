@@ -1,7 +1,7 @@
 <% if @deck %>
 <% @cur_round = [] %>
   <% @deck.cards.each {|card| @cur_round << card.question } %>
-  <%= p @cur_round[session[:guesses]] %>
+  <%= @cur_round[session[:guesses]] %>
 <% end %>
 
 <form action="/decks/<%= @deck.id %>/round/<%= @round.id %>" method="post">

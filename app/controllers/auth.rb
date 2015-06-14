@@ -5,31 +5,14 @@ get '/login' do
 end
 
 post '/login' do
-  if @user = User.find_by(email:params[:user][:email])
-    if @user.password == params[:user][:password]
-      session[:id] = @user.id
-      redirect '/decks'
-    end
-  else
-    @errors = "Incorrect login"
-    erb :'/auth/_login'
-  end
-  erb :'/auth/login'
-end
-
-post '/login' do
-  @user = User.find_by_email(params[:user][:email])
+  @user = User.find_by(email:params[:user][:email])
   if @user.password == params[:user][:password]
     session[:id] = @user.id
     redirect '/decks'
   else
-    "die"
+    @errors = "Incorrect login"
+    erb :'/auth/_login'
   end
-  erb :'/auth/login'
-end
-
-get '/signup' do
-  erb :'/auth/_signup'
 end
 
 post '/users' do

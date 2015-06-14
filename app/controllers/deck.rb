@@ -3,7 +3,7 @@ get '/decks' do
     @decks = Deck.all
     erb :'/decks/index'
   else
-    "ERROR"
+    "ERROR: YOU MUST BE LOGGED IN TO SEE OUR DECKS"
   end
 end
 
@@ -14,7 +14,7 @@ get '/decks/:id' do
     session[:guesses] = 0
     erb :'/decks/show'
   else
-    "ERROR"
+    "ERROR: YOU MUST BE LOGGED IN TO SEE THIS DECK"
   end
 end
 
@@ -24,7 +24,7 @@ get '/decks/:deck_id/round/:id' do
     @round = Round.find_by(id: params[:id])
     erb :'/round/show'
   else
-    "something"
+    "YOU MUST BE LOGGED IN TO PLAY! THIS DECK"
   end
 end
 
