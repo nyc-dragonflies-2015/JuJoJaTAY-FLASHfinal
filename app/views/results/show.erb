@@ -1,9 +1,5 @@
 <div class="text-center">
-  <h2>Number of correct cards:</h2>
-  <h3><%= @guess.all.where(correct: true).count %></h3>
-  <br>
-  <h2>Number of incorrect cards:</h2>
-  <h3><%= @guess.all.where(correct: false).count %></h3>
+  <%= erb :'results/_stats' %>
   <br>
   <div class="jumbotron">
     <h2><a href="/decks/<%= @deck.id %>">Play again?</a> | | <a href="/decks">Another deck?</a></h2>

@@ -53,7 +53,8 @@ get '/decks/:deck_id/round/:id/results' do
   if is_authenticated?
     @deck = Deck.find_by(id: params[:deck_id])
     @round = Round.find_by(id: params[:id])
-    @guess = Guess.where(round: @round)
+    @correct = Guess.where(round: @round, correct: true)
+    @incorrect = Guess.where(round: @round, correct: false)
     erb :'results/show'
   else
     @errors = "Sorry, you must be logged in to view results."
