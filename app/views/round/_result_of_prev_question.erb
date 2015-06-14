@@ -5,7 +5,10 @@
     </div>
   <% else %>
     <div class="alert alert-danger" role="alert">
-      <h3> U WRONG </h3>
+      <h2> U WRONG </h2>
+    </div>
+    <div class="alert-info" role="alert">
+      <h2>Correct Answer:  <%= @deck.cards[session[:guesses]-1].answer %></h2>
     </div>
   <% end %>
 <% end %>

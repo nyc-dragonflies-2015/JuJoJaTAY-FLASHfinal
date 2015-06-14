@@ -4,11 +4,14 @@
   <br>
   <br>
 
-
+<% if !current_user %>
   <div class="jumbotron">
     <div class="text-center">
       <h2>Sign Up and test Your Knowledge on some Dope Flash Cards</h2>
       <%= erb :'auth/_signup' %>
     </div>
   </div>
+<% else %>
+  <%= erb :'/decks/index' %>
+<% end %>
 </div>
