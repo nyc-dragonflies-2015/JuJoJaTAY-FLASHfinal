@@ -3,13 +3,13 @@ def require_logged_in
 end
 
 def is_authenticated?
-  return !!session[:user_id]
+  return !!session[:id]
 end
 
 
 def current_user
   if session[:user_id]
-    return User.find(session[:user_id])
+    return User.find(session[:id])
   else
     return nil
   end

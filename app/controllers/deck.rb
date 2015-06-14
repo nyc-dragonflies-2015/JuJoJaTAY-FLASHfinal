@@ -1,30 +1,33 @@
 get '/decks' do
-  if session[:id]
+  if is_authenticated?
     @decks = Deck.all
     erb :'/decks/index'
   else
-    "ERROR: YOU MUST BE LOGGED IN TO SEE OUR DECKS"
+    @errors = "Sorry, you must be logged in to view our decks."
+    erb :sorry
   end
 end
 
 get '/decks/:id' do
-  if session[:id]
+  if is_authenticated?
     @deck = Deck.find_by(id: params[:id])
     @round = Round.create(user_id: session[:id], deck_id: @deck.id)
     session[:guesses] = 0
     erb :'/decks/show'
   else
-    "ERROR: YOU MUST BE LOGGED IN TO SEE THIS DECK"
+    @errors = "Sorry, you must be logged in to view this deck."
+    erb :sorry
   end
 end
 
 get '/decks/:deck_id/round/:id' do
-  if session[:id]
+  if is_authenticated?
     @deck = Deck.find_by(id: params[:deck_id])
     @round = Round.find_by(id: params[:id])
     erb :'/round/show'
   else
-    "YOU MUST BE LOGGED IN TO PLAY! THIS DECK"
+    @errors = "Sorry, you must be logged in to play this deck"
+    erb :sorry
   end
 end
 
@@ -47,8 +50,13 @@ post '/decks/:deck_id/round/:id' do
 end
 
 get '/decks/:deck_id/round/:id/results' do
-  @deck = Deck.find_by(id: params[:deck_id])
-  @round = Round.find_by(id: params[:id])
-  @guess = Guess.where(round: @round)
-  erb :'results/show'
+  if is_authenticated?
+    @deck = Deck.find_by(id: params[:deck_id])
+    @round = Round.find_by(id: params[:id])
+    @guess = Guess.where(round: @round)
+    erb :'results/show'
+  else
+    @errors = "Sorry, you must be logged in to view results."
+    erb :sorry
+  end
 end

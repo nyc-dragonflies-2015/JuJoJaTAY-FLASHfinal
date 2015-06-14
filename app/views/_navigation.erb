@@ -1,10 +1,12 @@
 <ul class="nav nav-tabs">
   <li><a href="/" data-toggle="tab">Home</a></li>
   <li><a href="/decks" data-toggle="tab">Decks</a></li>
-  <li>
-    <% if is_authenticated? %>
-      <a href="/decks" data-toggle="tab">logout</a>
 
-    <% end %>
-  </li>
+  <% if is_authenticated? %>
+    <li><a href="/logout" data-toggle="tab">Logout</a></li>
+  <% else %>
+    <li><a href="/login" data-toggle="tab">Login</a></li>
+  <% end %>
+
+
 </ul>

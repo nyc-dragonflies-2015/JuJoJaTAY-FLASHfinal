@@ -4,6 +4,9 @@ class User < ActiveRecord::Base
   has_many :guesses, through: :rounds
   has_many :decks, through: :rounds
 
+  validates :email, presence: true
+  validates :password, presence: true
+
   def authenticate(plaintext_password)
     self.password == plaintext_password
   end

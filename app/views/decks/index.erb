@@ -1,7 +1,6 @@
-<img src='http://grapefruitricky.com/img/I&#39;msofancy.gif'/>
-<br><br>
-
-
-<% @decks.each do |deck| %>
-  <a href="/decks/<%= deck.id %>"><%= deck.name %></a>
-<% end %>
+<div class="text-center">
+  <h2>Choose your Discipline</h2><br>
+  <% @decks.each do |deck| %>
+    <h3><a href="/decks/<%= deck.id %>"><%= deck.name %></a></h3>
+  <% end %>
+</div>
