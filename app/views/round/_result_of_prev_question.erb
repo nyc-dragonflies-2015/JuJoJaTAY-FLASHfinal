@@ -1,0 +1,11 @@
+<% if cur_card > 0 %>
+  <% if @deck.cards[session[:guesses]-1].guesses.last.correct == true %>
+    <div class="alert alert-success" role="alert">
+      <h3> WELL DONE</h3>
+    </div>
+  <% else %>
+    <div class="alert alert-danger" role="alert">
+      <h3> U WRONG </h3>
+    </div>
+  <% end %>
+<% end %>
