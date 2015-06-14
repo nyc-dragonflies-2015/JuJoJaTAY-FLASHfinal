@@ -1,10 +1,12 @@
+<div class="text-center">
 <% if @deck %>
   <% @cur_round = [] %>
   <% @deck.cards.each {|card| @cur_round << card.question } %>
-  <%= @cur_round[session[:guesses]] %>
+  <h2><%= @cur_round[session[:guesses]] %></h2>
 <% end %>
 
 <form action="/decks/<%= @deck.id %>/round/<%= @round.id %>" method="post">
-  <input type="text" name="answer" placeholder="answer" id="answer"/>
-  <input type="submit" value="Submit"/>
+  <input type="text" name="answer" placeholder="answer" id="answer"/><br><br>
+  <button type="submit" class="btn btn-primary btn-lg">Submit Answer</button>
 </form>
+</div>
