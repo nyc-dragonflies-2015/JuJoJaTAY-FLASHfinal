@@ -34,8 +34,8 @@ end
 post '/decks/:deck_id/round/:id' do
   @deck = Deck.find_by(id: params[:deck_id])
   @round = Round.find_by(id: params[:id])
-  @guess = Guess.create(round_id: @round.id, card_id: @deck.cards[session[:guesses]].id)
-    if params[:answer].downcase == @deck.cards[session[:guesses]].answer.downcase
+  @guess = Guess.create(round_id: @round.id, card_id: @deck.cards[cur_card].id)
+    if params[:answer].downcase == @deck.cards[cur_card].answer.downcase
       @guess.update_attributes(correct: true)
     else
       @guess.update_attributes(correct: false)

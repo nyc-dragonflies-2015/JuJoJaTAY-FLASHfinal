@@ -6,7 +6,6 @@ def is_authenticated?
   return !!session[:id]
 end
 
-
 def current_user
   if session[:user_id]
     return User.find(session[:id])
