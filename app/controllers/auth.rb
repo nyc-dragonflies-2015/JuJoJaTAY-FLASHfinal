@@ -14,7 +14,7 @@ post '/login' do
       erb :'/auth/_login'
     end
   else
-    @errors = "You can't be blank!"
+    @errors = "You must first sign up before you can master the art of JuJoJaTAY Flash-FOO!"
     erb :'auth/_login'
   end
 end
