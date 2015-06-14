@@ -1,6 +1,8 @@
 <div class="text-center">
   <h2>Choose your Discipline</h2><br>
-  <% @decks.each do |deck| %>
-    <h3><a href="/decks/<%= deck.id %>"><%= deck.name %></a></h3>
-  <% end %>
+  <div class="jumbotron">
+    <% @decks.each do |deck| %>
+      <h3><a href="/decks/<%= deck.id %>"><%= deck.id %>:   <%= deck.name %></a></h3>
+    <% end %>
+  </div>
 </div>
