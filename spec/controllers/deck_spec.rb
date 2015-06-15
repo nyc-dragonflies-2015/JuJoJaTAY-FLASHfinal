@@ -17,3 +17,5 @@ describe 'my sinatra application' do
      expect(last_response).to be_ok
   end
 end
+
+
