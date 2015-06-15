@@ -1,44 +1,45 @@
 get '/decks' do
-  if session[:id]
+  if is_authenticated?
     @decks = Deck.all
     erb :'/decks/index'
   else
-    "ERROR"
+    @errors = "Sorry, you must be logged in to view our decks."
+    erb :sorry
   end
 end
 
 get '/decks/:id' do
-  if session[:id]
+  if is_authenticated?
     @deck = Deck.find_by(id: params[:id])
     @round = Round.create(user_id: session[:id], deck_id: @deck.id)
     session[:guesses] = 0
     erb :'/decks/show'
   else
-    "ERROR"
+    @errors = "Sorry, you must be logged in to view this deck."
+    erb :sorry
   end
 end
 
 get '/decks/:deck_id/round/:id' do
-  if session[:id]
+  if is_authenticated?
     @deck = Deck.find_by(id: params[:deck_id])
     @round = Round.find_by(id: params[:id])
     erb :'/round/show'
   else
-    "something"
+    @errors = "Sorry, you must be logged in to play this deck"
+    erb :sorry
   end
 end
 
 post '/decks/:deck_id/round/:id' do
   @deck = Deck.find_by(id: params[:deck_id])
   @round = Round.find_by(id: params[:id])
-  @guess = Guess.create(round_id: @round.id, card_id: @deck.cards[session[:guesses]].id)
-  if session[:guesses] <= @deck.cards.size
-    if params[:answer] == @deck.cards[session[:guesses]].answer
+  @guess = Guess.create(round_id: @round.id, card_id: @deck.cards[cur_card].id)
+    if params[:answer].downcase == @deck.cards[cur_card].answer.downcase
       @guess.update_attributes(correct: true)
     else
       @guess.update_attributes(correct: false)
     end
-  end
   session[:guesses] += 1
   if session[:guesses] == @deck.cards.size
     redirect "decks/#{@deck.id}/round/#{@round.id}/results"
@@ -49,8 +50,14 @@ post '/decks/:deck_id/round/:id' do
 end
 
 get '/decks/:deck_id/round/:id/results' do
-  @deck = Deck.find_by(id: params[:deck_id])
-  @round = Round.find_by(id: params[:id])
-  @guess = Guess.where(round: @round)
-  erb :'results/show'
+  if is_authenticated?
+    @deck = Deck.find_by(id: params[:deck_id])
+    @round = Round.find_by(id: params[:id])
+    @correct = Guess.where(round: @round, correct: true)
+    @incorrect = Guess.where(round: @round, correct: false)
+    erb :'results/show'
+  else
+    @errors = "Sorry, you must be logged in to view results."
+    erb :sorry
+  end
 end

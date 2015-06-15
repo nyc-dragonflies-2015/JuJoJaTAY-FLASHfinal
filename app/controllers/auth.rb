@@ -1,5 +1,3 @@
-require 'pry'
-
 get '/login' do
   erb :'/auth/_login'
 end
@@ -9,27 +7,14 @@ post '/login' do
     if @user.password == params[:user][:password]
       session[:id] = @user.id
       redirect '/decks'
+    else
+      @errors = "Incorrect login"
+      erb :'/auth/_login'
     end
   else
-    @errors = "Incorrect login"
-    erb :'/auth/_login'
+    @errors = "You must first sign up before you can master the art of JuJoJaTAY Flash-FOO!"
+    erb :'auth/_login'
   end
-  erb :'/auth/login'
-end
-
-post '/login' do
-  @user = User.find_by_email(params[:user][:email])
-  if @user.password == params[:user][:password]
-    session[:id] = @user.id
-    redirect '/decks'
-  else
-    "die"
-  end
-  erb :'/auth/login'
-end
-
-get '/signup' do
-  erb :'/auth/_signup'
 end
 
 post '/users' do
@@ -38,11 +23,12 @@ post '/users' do
     session[:id] = @user.id
     redirect '/decks'
   else
-    erb :signup
+    @errors = "You didn't do it right."
+    erb :'auth/_signup'
   end
 end
 
 get '/logout' do
   session[:id] = nil
-  redirect '/login'
+  redirect '/'
 end

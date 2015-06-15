@@ -1,11 +1,16 @@
+<div class="text-center">
+  <h2>Login and Test your JuJoJaTAY Flash-FOO!</h2>
   <% if @errors %>
-  <%= @errors %>
-  <br><br>
-  <img src= 'http://cdn.smosh.com/sites/default/files/legacy.images/smosh-pit/032011/family-guy-doggie-hell.gif'/>
+    <h2><%= @errors %></h2>
+    <h3>Please Try Again</h3>
+    <br>
+    <img src= 'http://cdn.smosh.com/sites/default/files/legacy.images/smosh-pit/032011/family-guy-doggie-hell.gif'/>
   <% end %>
-
-  <form action='/login' method='post'>
-    <input type="text" name="user[email]" placeholder="email"/>
-    <input type="password" name="user[password]" placeholder="password"/>
-    <input type="submit" value="Login"/>
-  </form>
+  <div class="jumbotron">
+    <form action='/login' method='post'>
+      <input type="text" name="user[email]" placeholder="email"/>
+      <input type="password" name="user[password]" placeholder="password"/><br><br>
+      <button type="submit" class="btn btn-primary btn-lg">Login</button>
+    </form>
+  </div>
+</div>

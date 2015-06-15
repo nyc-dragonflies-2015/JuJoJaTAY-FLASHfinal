@@ -1,4 +1,6 @@
-<a href='/logout'>LOGOUT</a><br><br>
-"Want to play this game?"
-<br>
-<a href="/decks/<%= @deck.id %>/round/<%= @round.id %>">Yes</a> | | <a href="/decks">No</a>
+<div class="text-center">
+  <h2>Are you sure you want to play this game?</h2>
+  <div class="jumbotron">
+    <h2><a href="/decks/<%= @deck.id %>/round/<%= @round.id %>">Yes</a> | | <a href="/decks">No</a></h2>
+  </div>
+</div>

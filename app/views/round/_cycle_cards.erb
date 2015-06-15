@@ -1,0 +1,6 @@
+<% if @deck %>
+  <% @cur_round = [] %>
+  <% @deck.cards.each {|card| @cur_round << card.question } %>
+  <h2><%= @cur_round[cur_card] %></h2>
+<% end %>
+
